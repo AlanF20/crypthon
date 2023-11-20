@@ -1,0 +1,40 @@
+.bx {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  font-size: 2.8rem;
+  justify-content: center;
+  align-items: center;
+  color: rgb(74, 74, 74);
+}
+
+.bx span {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+}
+
+.navBar {
+  width: 100%;
+  max-width: 500px;
+  position: fixed;
+  align-self: flex-end;
+  display: flex;
+  justify-content: space-between;
+}
+
+.selected {
+  font-weight: bolder;
+  color: rgb(0, 0, 0);
+}
+
+.trade {
+  background-color: #1d4ed8;
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+  font-size: 4rem;
+}
+
+.navList {
+  list-style: none;
+}
