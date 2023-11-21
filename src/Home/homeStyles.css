@@ -1,17 +1,24 @@
 .home__header{
   width: 100%;
-  padding: 5px 10px;
+  padding: 10px 10px;
 }
 .home__main{
   width: 100%;
   display: flex;
   align-items: center;
-  padding-top: 20px;
+  padding-top: 50px;
+  flex-direction: column;
 }
 .main__portfolio{
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+.newButtonContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 .newButton{
@@ -34,5 +41,62 @@
   display: flex;
   justify-content: center;
   gap: 50px;
-  padding-top: 20px;
+  padding-top: 30px;
+}
+.topCoins,
+.gainers{
+  width: 100%;
+  padding: 10px;
+  overflow: hidden;
+  overflow-x: scroll
+
+}
+.topCoins__header,
+.gainers__header{
+  width: 95%;
+  max-width: 500px;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  align-items: center;
+  font-weight: 500;
+}
+.topCoins__main{
+  padding-top: 30px;
+  width: fit-content;
+  display: flex;
+  flex: 1;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+.topCoin{
+  width: 150px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+}
+.topCoin__img{
+  width: 30px;
+}
+.container__img{
+  width: 100%;
+}
+.topCoin__info{
+  padding: 5px 0px 25px 0px;
+}
+
+@media screen and (min-width: 500px){
+  .topCoins::-webkit-scrollbar{
+    width: 2px;
+    height: 8px;
+  }
+  .topCoins::-webkit-scrollbar-thumb {
+    background-color: rgb(191, 191, 191);
+    border-radius: 20px; 
+  }
 }

@@ -1,9 +1,15 @@
 import { Heading, Text } from '@chakra-ui/react'
-import { BiTransfer, BiDownArrowAlt, BiSolidUpArrowAlt } from 'react-icons/bi'
+import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'
+import { IoSwapHorizontal } from 'react-icons/io5'
 import { NewBadge } from './components/NewBadge'
 import './homeStyles.css'
 import { NewButton } from './components/NewButton'
+import { Link } from 'react-router-dom'
+import { cryptoCurrencies } from './utils'
+import { TopCoin } from './components/TopCoin'
+
 export function Home() {
+
   return (
     <main className='main'>
       <header className='home__header'>
@@ -15,17 +21,47 @@ export function Home() {
           <Heading size='4xl' fontWeight='600'>$21,667.37</Heading>
           <div className='portfolioActions'>
             <NewButton text='Trade'>
-              <BiTransfer fontSize='2.2rem'/>
+              <IoSwapHorizontal fontSize='2rem' />
             </NewButton>
             <NewButton text='Depositar'>
-              <BiSolidUpArrowAlt fontSize='2.2rem'/>
+              <AiOutlineArrowUp fontSize='2rem' />
             </NewButton>
             <NewButton text='Retirar'>
-              <BiDownArrowAlt fontSize='2.2rem'/>
+              <AiOutlineArrowDown fontSize='2rem' />
             </NewButton>
           </div>
         </section>
+        <section className='topCoins'>
+          <header className='topCoins__header'>
+            <Text fontSize='medium'>Top coins</Text>
+            <Text fontSize='small'>
+              <Link to='/coins'>
+                Ver todo
+              </Link>
+            </Text>
+          </header>
+          <main className='topCoins__main'>
+            {cryptoCurrencies.map(crypto => {
+              return (
+                <TopCoin key={crypto.cryptoSymbol} img={crypto.cryptoImg} coinName={crypto.cryptoName} price={crypto.cryptoPrice} />
+              )
+            })}
+          </main>
+        </section>
       </main>
+      <section className='gainers'>
+        <header className='gainers__header'>
+          <div>
+            <Text fontSize='medium'>Gainers and losers</Text>
+            <Text fontSize='x-small' color='#979797'>Basado en el top 100 de monedas</Text>
+          </div>
+          <Text fontSize='small'>
+            <Link to='coins'>
+              Ver todo
+            </Link>
+          </Text>
+        </header>
+      </section>
     </main>
   )
 }

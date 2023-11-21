@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+  <path fill="red" fill-opacity="1" opacity=".5"
+    d="M0,256L288,32L576,288L864,0L1152,64L1440,224L1440,320L1152,320L864,320L576,320L288,320L0,320Z"></path>
+</svg>

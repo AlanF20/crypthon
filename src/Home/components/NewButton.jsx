@@ -1,3 +1,4 @@
+import { Text } from '@chakra-ui/react'
 
 export function NewButton({ children, text }) {
   return (
@@ -5,7 +6,7 @@ export function NewButton({ children, text }) {
       <button className="newButton">
         {children}
       </button>
-      <p className="newButtonText">{text}</p>
+      <Text className="newButtonText" fontSize='small'>{text}</Text>
     </section>
 
   )
