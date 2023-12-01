@@ -1,0 +1,38 @@
+.coins__main{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.coins__title{
+  width: 100%;
+  padding-left: 30px;
+  padding-top: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.coin{
+  width: 90%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #cecece;
+  padding: 15px;
+}
+.coin__image{
+  width: 20%;
+  max-width: 40px;
+}
+.coin__image img{
+  width: 100%;
+}
+.coin__info{
+  width: 40%;
+  padding-left: 10px;
+}
+.coin__priceInfo{
+  width: 50%;
+}
+.coin__priceInfo p{
+  text-align: right;
+}

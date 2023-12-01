@@ -48,8 +48,8 @@
   width: 100%;
   padding: 10px;
   overflow: hidden;
-  overflow-x: scroll
-
+  overflow-x: scroll;
+  padding-top: 20px
 }
 .topCoins__header,
 .gainers__header{
@@ -81,7 +81,7 @@
   background-repeat: no-repeat;
 }
 .topCoin__img{
-  width: 30px;
+  width: 50px;
 }
 .container__img{
   width: 100%;

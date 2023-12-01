@@ -1,8 +1,8 @@
 import { Text } from '@chakra-ui/react'
 
-export function NewButton({ children, text }) {
+export function NewButton({ children, text, onClick }) {
   return (
-    <section className="newButtonContainer">
+    <section className="newButtonContainer" onClick={onClick}>
       <button className="newButton">
         {children}
       </button>

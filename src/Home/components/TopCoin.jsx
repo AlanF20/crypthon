@@ -12,7 +12,7 @@ export function TopCoin({ img, coinName, price }) {
   return (
     <div className='topCoin' style={{ backgroundImage: `url(${randomWave})`, backgroundPosition: 'bottom'}}>
       <div className='topCoin__img'>
-        <img className='container__img' src={img} />
+        <img className='container__img' src={`data:image/png;base64,${img}`} />
       </div>
       <section className='topCoin__info'>
         <Text fontSize='medium' fontWeight='bolder'>{coinName}</Text>
