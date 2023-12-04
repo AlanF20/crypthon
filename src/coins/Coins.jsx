@@ -5,14 +5,19 @@ import { useEffect, useState } from 'react'
 
 export function Coins() {
   const [coins, setCoins] = useState([])
+  const token = localStorage.getItem('auth_token')
   useEffect(() => {
     async function getCryptos() {
-      const request = await fetch('http://localhost:3000/cryptocurrencies')
+      const request = await fetch('http://localhost:3000/cryptocurrencies', {
+        headers: {
+          token: token
+        }
+      })
       const response = await request.json()
       setCoins(response)
     }
     getCryptos()
-  }, [])
+  }, [token])
   return (
     <main className='coins__main'>
       <Text className='coins__title'>All coins</Text>

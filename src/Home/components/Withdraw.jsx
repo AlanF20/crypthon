@@ -65,12 +65,12 @@ export function Withdraw({ fetchInfo }) {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader fontSize={'medium'}>Añadir una nueva moneda.</ModalHeader>
+          <ModalHeader fontSize={'medium'}>Retirar recursos.</ModalHeader>
           <ModalCloseButton />
           <form onSubmit={handleSubmit}>
             <ModalBody pb={6}>
               <FormControl >
-                <FormLabel fontSize={'small'}>Nombre</FormLabel>
+                <FormLabel fontSize={'small'}>Cantidad</FormLabel>
                 <Input onChange={handleInputChange} fontSize={'small'} placeholder='100' name='money_balance' />
               </FormControl>
             </ModalBody>

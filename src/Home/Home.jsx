@@ -8,12 +8,14 @@ import { TopCoin } from './components/TopCoin'
 import { useEffect, useState } from 'react'
 import { Deposit } from './components/Deposit'
 import { Withdraw } from './components/Withdraw'
+import { TopGainers } from './components/TopGainers'
 
 export function Home() {
   const [cryptos, setCryptos] = useState([])
   const [user, setUser] = useState({})
   const [reFetch, setRefetch] = useState(false)
   const userId = localStorage.getItem('user_id')
+  const token = localStorage.getItem('auth_token')
   const formatter = new Intl.NumberFormat('es-MX', {
     style: 'currency',
     currency: 'MXN',
@@ -25,7 +27,11 @@ export function Home() {
   const formattedAmount = formatter.format(user.money_balance)
   useEffect(() => {
     async function getCryptos() {
-      const request = await fetch('http://localhost:3000/cryptocurrencies')
+      const request = await fetch('http://localhost:3000/cryptocurrencies', {
+        headers: {
+          token: token
+        }
+      })
       const response = await request.json()
       setCryptos(response)
     }
@@ -37,7 +43,7 @@ export function Home() {
     }
     getCryptos()
     getUser()
-  }, [userId, reFetch])
+  }, [userId, reFetch, token])
   return (
     <main className='main'>
       <header className='home__header'>
@@ -85,6 +91,13 @@ export function Home() {
             </Link>
           </Text>
         </header>
+        <main className='topGainers__main'>
+          {cryptos.map(crypto => {
+            return (
+              <TopGainers key={crypto.id} img={crypto.cryptoImg} coinName={crypto.cryptoName} price={crypto.cryptoPrice} coinIncrement={crypto.coinIncrement}  />
+            )
+          })}
+        </main>
       </section>
     </main>
   )

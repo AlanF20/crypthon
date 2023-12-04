@@ -11,6 +11,7 @@ export function Trade() {
   const [input, setInput] = useState(0)
   const [exceed, setExceed] = useState(false)
   const [valueInput, setValueInput] = useState(0)
+  const token = localStorage.getItem('auth_token')
   const oldUserInfo = JSON.parse(localStorage.getItem('user'))
   const handleSelected = (e) => {
     const selectedCrypto = coins.find((crypto) => crypto.cryptoName === e.target.value)
@@ -28,13 +29,17 @@ export function Trade() {
   }, [input, oldUserInfo.money_balance])
   useEffect(() => {
     async function getCryptos() {
-      const request = await fetch('http://localhost:3000/cryptocurrencies')
+      const request = await fetch('http://localhost:3000/cryptocurrencies', {
+        headers: {
+          token: token
+        }
+      })
       const response = await request.json()
       setCoins(response)
       setSelected(response[0])
     }
     getCryptos()
-  }, [])
+  }, [token])
   useEffect(() => {
     const conversion = selected.cryptoPrice * valueInput
     setInput(conversion)

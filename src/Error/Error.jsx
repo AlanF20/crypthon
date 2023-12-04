@@ -4,9 +4,17 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 export function Error() {
+  const token = localStorage.getItem('auth_token')
+  const [tokenError, setTokenError] = useState(false)
+  useEffect(() => {
+    if (!token) {
+      setTokenError(true)
+    }
+  }, [token])
   return (
     <Box
       display={'flex'}
@@ -23,17 +31,18 @@ export function Error() {
         Error :( surgio un problema inesperado
       </Heading>
       <Text mt="4" fontSize="xl" fontWeight="medium">
-        Parece que has llegado a una página que no existe o ocurrio un problema.
+        {tokenError ? 'No tienes los privilegios para estar aqui.' : 'Parece que has llegado a una página que no existe o ocurrio un problema.'}
       </Text>
       <Button
         as={Link}
-        to="/crypthon/home"
+        to={tokenError ? '/' : '/crypthon/home'}
         mt="8"
         colorScheme="teal"
         bg="teal.400"
         size="md"
       >
-        Volver a la página de inicio
+        {tokenError ? 'Vuelve a iniciar sesion.' : 'Volver a la página de inicio'}
+
       </Button>
     </Box>
   )

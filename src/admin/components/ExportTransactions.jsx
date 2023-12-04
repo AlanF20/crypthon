@@ -21,12 +21,10 @@ export function ExportTransactions({ setFetch }) {
       if (response.ok) {
         const blob = await response.blob()
 
-        // Crear un enlace
         const downloadLink = document.createElement('a')
         downloadLink.href = window.URL.createObjectURL(blob)
         downloadLink.download = 'transactions_data.csv'
 
-        // Simular un clic en el enlace
         document.body.appendChild(downloadLink)
         downloadLink.click()
         document.body.removeChild(downloadLink)

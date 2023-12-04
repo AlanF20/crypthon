@@ -1,10 +1,11 @@
 import { Button, FormControl, FormLabel, Input, Text, useToast } from '@chakra-ui/react'
 import { useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 export function Profile() {
   const [userInfo, setUserInfo] = useState({})
   const [update, setUpdated] = useState(false)
+  const navigate = useNavigate()
   const oldUserInfo = JSON.parse(localStorage.getItem('user'))
   const toast = useToast()
   const handleChange = (e) => {
@@ -41,7 +42,10 @@ export function Profile() {
         isClosable: true,
       })
     }
-
+  }
+  const handleCloseSession = () => {
+    localStorage.clear()
+    navigate('/')
   }
   return (
     <main style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -64,6 +68,9 @@ export function Profile() {
 
         <Button type='submit' fontSize={'small'} colorScheme='blue' marginTop={'15px'}>
           Actualizar mi información.
+        </Button>
+        <Button onClick={handleCloseSession} type='button' fontSize={'small'} colorScheme='red' marginTop={'15px'} marginLeft={'15px'}>
+          Cerrar sesión.
         </Button>
       </form>
       {update && <Navigate to='/crypthon/home' />}

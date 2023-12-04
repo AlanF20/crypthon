@@ -61,7 +61,8 @@
   align-items: center;
   font-weight: 500;
 }
-.topCoins__main{
+.topCoins__main,
+.topGainers__main{
   padding-top: 30px;
   width: fit-content;
   display: flex;
@@ -89,7 +90,25 @@
 .topCoin__info{
   padding: 5px 0px 25px 0px;
 }
+.topGainers__main{
+  gap: 10px;
+  margin-top: 40px;
 
+}
+.topGainer{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid #eee;
+  padding: 5px;
+  border-radius: 10px;
+}
+.topGainer__img{
+  width: 30px;
+}
+.coinIncrement{
+  align-self: flex-end;
+}
 @media screen and (min-width: 500px){
   .topCoins::-webkit-scrollbar{
     width: 2px;

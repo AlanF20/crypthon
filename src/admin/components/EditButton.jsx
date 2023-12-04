@@ -17,6 +17,7 @@ import { useState } from 'react'
 import { AiOutlineEdit } from 'react-icons/ai'
 export function EditButton({ cryptoInfo, setFetch }) {
   const toast = useToast()
+  const token = localStorage.getItem('auth_token')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [formData, setFormData] = useState(cryptoInfo)
   const handleInputChange = (e) => {
@@ -39,12 +40,17 @@ export function EditButton({ cryptoInfo, setFetch }) {
     cryptoData.append('cryptoImg', formData.cryptoImg)
     cryptoData.append('coinIncrement', formData.coinIncrement)
     try {
-      const response = await fetch(`http://localhost:3000/edit_crypto/${formData.id}`, {
+      const request = await fetch(`http://localhost:3000/edit_crypto/${formData.id}`, {
         method: 'PUT',
+        headers: {
+          token: token
+        },
         body: cryptoData,
       })
-
-      if (response.ok) {
+      const response = await request.json()
+      if (response.message == 'Token no encontrado' || response.message == 'Token invalido') {
+        throw new Error
+      } else {
         toast({
           title: 'Edicion realizada.',
           description: 'Criptomoneda editada correctamente.',
@@ -52,19 +58,18 @@ export function EditButton({ cryptoInfo, setFetch }) {
           duration: 9000,
           isClosable: true,
         })
-      } else {
-        toast({
-          title: 'Ocurrio un error.',
-          description: 'Error al editar la criptomoneda.',
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-        })
       }
       setFetch()
       onClose()
     } catch (error) {
-      console.error('Error de red:', error)
+      toast({
+        title: 'Ocurrio un error.',
+        description: 'Error al editar la criptomoneda.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+      onClose()
     }
   }
   return (

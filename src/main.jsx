@@ -12,10 +12,16 @@ import { AdminPanel } from './admin/AdminPanel'
 import { Error } from './Error/Error'
 import { Profile } from './Profile/Profile'
 import { Trade } from './Trade/Trade'
+import { LandingPage } from './LandingPage/LandingPage'
 
 const router = createBrowserRouter([
   {
     path: '/',
+    element: <LandingPage />,
+    errorElement: <Error />
+  },
+  {
+    path: '/Login',
     element: <Login />,
     errorElement: <Error />
   },

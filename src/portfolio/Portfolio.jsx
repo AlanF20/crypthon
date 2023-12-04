@@ -19,14 +19,19 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 export function Portfolio() {
   const [wallet, setWallet] = useState([])
   const userInfo = JSON.parse(localStorage.getItem('user'))
+  const token = localStorage.getItem('auth_token')
   useEffect(() => {
     async function getWallet() {
-      const request = await fetch(`http://localhost:3000/wallet/${userInfo.id}`)
+      const request = await fetch(`http://localhost:3000/wallet/${userInfo.id}`, {
+        headers: {
+          token: token
+        }
+      })
       const response = await request.json()
       setWallet(response)
     }
     getWallet()
-  })
+  }, [userInfo.id, token])
   const labels = wallet.map(item => {
     return item.cryptoData.cryptoName
   })
@@ -63,7 +68,7 @@ export function Portfolio() {
     <main className='portfolio__main'>
       <Text fontSize='4xl' fontWeight='bolder' paddingTop='20px' paddingLeft={'30px'}>Portfolio</Text>
       <Pie data={data} />
-      <TableContainer paddingTop='20px'>
+      <TableContainer paddingTop='20px' overflowY={'scroll'}>
         <Table variant='simple'>
           <Thead>
             <Tr>

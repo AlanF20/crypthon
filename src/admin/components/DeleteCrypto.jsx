@@ -14,14 +14,20 @@ import {
 import { AiOutlineDelete } from 'react-icons/ai'
 export function DeleteCrypto({ cryptoInfo, setFetch }) {
   const toast = useToast()
+  const token = localStorage.getItem('auth_token')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/delete_crypto/${cryptoInfo.id}`, {
+      const request = await fetch(`http://localhost:3000/delete_crypto/${cryptoInfo.id}`, {
         method: 'DELETE',
+        headers: {
+          token: token
+        }
       })
-
-      if (response.ok) {
+      const response = await request.json()
+      if (response.message == 'Token no encontrado' || response.message == 'Token invalido') {
+        throw new Error
+      } else {
         toast({
           title: 'Eliminacion realizada.',
           description: 'Criptomoneda eliminada correctamente.',
@@ -29,19 +35,19 @@ export function DeleteCrypto({ cryptoInfo, setFetch }) {
           duration: 9000,
           isClosable: true,
         })
-      } else {
-        toast({
-          title: 'Ocurrio un error.',
-          description: 'Error al eliminar la criptomoneda.',
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-        })
+
       }
       setFetch()
       onClose()
     } catch (error) {
-      console.error('Error de red:', error)
+      toast({
+        title: 'Ocurrio un error.',
+        description: 'Error al eliminar la criptomoneda.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+      onClose()
     }
   }
   return (

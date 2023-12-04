@@ -17,6 +17,7 @@ import { useState } from 'react'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 export function AddCrypto({ setFetch }) {
   const toast = useToast()
+  const token = localStorage.getItem('auth_token')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [formData, setFormData] = useState({
     cryptoName: '',
@@ -47,32 +48,35 @@ export function AddCrypto({ setFetch }) {
     formDataToSend.append('cryptoImg', formData.cryptoImg)
 
     try {
-      const response = await fetch('http://localhost:3000/add_crypto', {
+      const request = await fetch('http://localhost:3000/add_crypto', {
         method: 'POST',
+        headers: {
+          token: token
+        },
         body: formDataToSend,
       })
-
-      if (response.ok) {
-        toast({
-          title: 'Insercion realizada.',
-          description: 'Criptomoneda capturada correctamente.',
-          status: 'success',
-          duration: 9000,
-          isClosable: true,
-        })
-      } else {
-        toast({
-          title: 'Ocurrio un error.',
-          description: 'Error al capturar la criptomoneda.',
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-        })
+      const response = await request.json()
+      if (response.message == 'Token no encontrado' || response.message == 'Token invalido') {
+        throw new Error
       }
+      toast({
+        title: 'Insercion realizada.',
+        description: 'Criptomoneda añadida correctamente.',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      })
       setFetch()
       onClose()
     } catch (error) {
-      console.error('Error de red:', error)
+      toast({
+        title: 'Ocurrio un error.',
+        description: 'Error al capturar la criptomoneda.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+      onClose()
     }
   }
   return (
